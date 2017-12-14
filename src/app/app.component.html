@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Git-Tracker</a>
+        
+      </div>
+    
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+         
+        </ul>
+      </div><!--/.nav-collapse -->
+    
+  </nav>
+  <div class="row"> 
+    <div class="col-md-3">
+    
+    <div class="vertical-menu" >
+    <a routerLink="/status" routerLinkActive="active" id="bttn" ><i class="glyphicon glyphicon-check"></i> Project Status Tracker</a><br>
+    <a routerLink="/github" routerLinkActive="active" id="bttn1"> <i class="glyphicon glyphicon-user"></i> Explore your Buddies</a><br>
+    <a routerLink="/organisation" routerLinkActive="active" id="bttn2"> <i class="fa fa-institution"></i>  Orginisation Tracker</a><br>
+    </div>
+    </div>
+    <div class="col-md-9 display">
+    <router-outlet></router-outlet>
+    </div>
+    </div>
+   

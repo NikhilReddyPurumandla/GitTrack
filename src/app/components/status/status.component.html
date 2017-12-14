@@ -1,0 +1,314 @@
+<script src="node_modules/chart.js/src/chart.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+            <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Github Repo Url" [(ngModel)]="username" name="username" ng-required="username">    
+                </div>  <div  class="form-group col-md-6">  <button (click)=getDetails() class="btn btn-primary" type="submit">search</button> 
+                
+                </div>
+                     
+  
+   <br><br><br>
+           <div *ngIf="user">
+                <ul class="tabs" >
+                    
+                    <li class="tab">
+                        <input type="radio" name="tabs" checked="checked" id="tab1" />
+                        <label for="tab1">Contributors</label>
+                        <div id="tab-content1" class="content">
+                        
+                          <div class="panel panel-default" >
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Contributors</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div *ngFor="let use of user">
+                                                <div class="row">
+                                                    <div class="col-md-9" >
+                                                       <br> <h4><b>{{use.login}}</b></h4> <br>   
+                                                   
+                                                        <br>
+                                                        <h5><b>Contribution Graph</b></h5><br>
+                                                        <img src="http://ghchart.rshah.org/409ba5/{{use.login}}" />
+                                                    <br><br></div>
+                                                    <div class="col-md-3">
+                                                            <br> <span class="label label-warning">{{use.contributions}} Contributions</span>
+                                                      
+                                                    </div>    
+                                                </div> 
+                                                <hr />  
+                                                
+                                            </div>    
+                                        </div>    
+                                    </div>
+                                </div>
+                           </div>
+                        </div>
+                    </li>
+                    
+                    <li class="tab">
+                      <input type="radio" name="tabs" id="tab2" />
+                      <label for="tab2">Branches</label>   
+                      <div id="tab-content2" class="content">
+                            <div class="panel panel-default" >
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Branches</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div *ngFor="let part of branch">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                          <br>  <h4><b>Branch Name:</b>{{part.name}}</h4>    
+                                                          <br>
+                                                            <p><b>URL:</b>{{part.commit.url}}</p>
+                                                            <br>
+                                
+                                                            <span class="label label-success"><b>SHA:</b>{{part.commit.sha}}</span>
+                                                            <br>
+                                                        </div>
+                                                    </div> 
+                                                    <hr />  
+                                                </div>    
+                                            </div>    
+                                        </div>
+                                    </div>
+                               </div>
+                       </div>
+                    </li>
+                
+                     <li class="tab">
+                      <input type="radio" name="tabs" id="tab3" />
+                      <label for="tab3">Commit History</label>   
+                      <div id="tab-content3" class="content">
+                            <div class="panel panel-default" >
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Commit History</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div *ngFor="let msg of commit">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                                <br>  <h4><b>Committer:</b>{{msg.commit.committer.name}}</h4>    
+                                                          <br>
+                                                            <p><b>message:</b>{{msg.commit.message}}</p>
+                                                            
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                                <br>   <span class="label label-primary">{{msg.commit.committer.date}}</span>
+                                                           
+                                                        </div>    
+                                                    </div> 
+                                                    <hr />  
+                                                </div>    
+                                            </div>    
+                                        </div>
+                                    </div>
+                               </div>
+                            
+                      </div>
+                    </li>
+                   
+                          
+                          
+                   
+
+                    <li class="tab">
+                            <input type="radio" name="tabs" id="tab4" />
+                            <label for="tab4">Commit tracker</label>
+                            
+                            <div id="tab-content4" class="content">
+                            
+                              <div class="panel panel-default" >
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Day wise Commits</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-5">  Start Date:<input type="date" class="form-control" placeholder="Start Date" [(ngModel)]="sdate" name="sdate" >  </div>  
+                                                        <div class="form-group col-md-5">
+                                                       End Date:<input type="date" class="form-control" placeholder="end Date" [(ngModel)]="edate" name="edate" > </div>
+                                                    <div  class="form-group col-md-2">  <br><button (click)=getDate() class="btn btn-success" type="submit">search</button> 
+                                                        
+                                                        </div>
+                                                </div>
+                                                <div *ngFor="let msg of date">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                    <br>  <h4><b>Committer:</b>{{msg.commit.committer.name}}</h4>    
+                                                              <br>
+                                                                <p><b>message:</b>{{msg.commit.message}}</p>
+                                                                
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                    <br>   <span class="label label-primary">{{msg.commit.committer.date}}</span>
+                                                               
+                                                            </div>    
+                                                        </div> 
+                                                        <hr />  
+                                                    </div>   
+                                            </div>    
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                        </li>
+                        <li class="tab">
+                                <input type="radio" name="tabs" id="tab5" />
+                             <label for="tab5">Graph</label>   
+                                <div id="tab-content5" class="content">
+                                      <div class="panel panel-default" id="e">
+                                              <div class="panel-heading">
+                                                  <h3 class="panel-title">Commit Graph</h3>
+                                              </div>
+                                              <div class="panel-body">
+                                                  <div class="row">
+                                                   
+                                                        
+                                                                  <div class="col-md-12">
+                                                                      <div style="display: block" *ngIf="graph">
+                                                                          
+                                                                             <canvas 
+                                                                                    
+                                                                                    baseChart
+                                                                                    [datasets]="barChartData"
+                                                                                    [labels]="barChartLabels"
+                                                                                    [options]="barChartOptions"
+                                                                                    [legend]="barChartLegend"
+                                                                                    [chartType]="barChartType"
+                                                                                    (chartHover)="chartHovered($event)"
+                                                                                    (chartClick)="chartClicked($event)"></canvas> 
+                                                                                      
+                                                                          </div> 
+                                                                          <br><br>  <legend>Week wise commit graph</legend>
+                                                                         
+                                                                          <div style="display: block" *ngIf="con">
+                                                                                
+                                                                                   <canvas 
+                                                                                          
+                                                                                          baseChart
+                                                                                          [datasets]="f"
+                                                                                          [labels]="b"
+                                                                                          [options]="g"
+                                                                                          [legend]="e"
+                                                                                          [chartType]="d"
+                                                                                          (chartHover)="chartHovered($event)"
+                                                                                          (chartClick)="chartClicked($event)"></canvas> 
+                                                                                            
+                                                                                </div> 
+                                                                    
+                                                              </div> 
+                                                              
+                                                              <hr />  
+                                                          </div>    
+                                                      </div>    
+                                                  </div>
+                                                  
+                                </div>
+                              </li>
+                              <li class="tab">
+                                <input type="radio" name="tabs" id="tab6" />
+                                <label for="tab6">Logs</label>
+                                
+                                <div id="tab-content6" class="content">
+                                
+                                 
+                                                
+                                                            <div class="row">
+                                                                    <div>
+                                                                        
+                                                                          
+                                                                    </div> 
+                                                               
+                                                                <div>
+                                                                       
+                                                                       <div>
+                                                                           <table  class="table  table-bordered">
+                                                                               
+                                                                               <thead>
+                                                                                 <tr>
+                                                                                   <th>Contributor</th>
+                                                                                  
+                                                                                   <ng-container *ngFor="let d of log;let i=index"> 
+                                                                                        <ng-container *ngIf="i<1"> 
+                                                                            <th   *ngFor="let c of d.weeks.reverse(); let j=index">
+                                                                                  
+                                                                              <b>  {{c.w * 1000 | date:'dd,MMMyy '}}</b>
+                                                                          
+                                                                           
+                                                                            </th> 
+                                                                        </ng-container>
+                                                                        </ng-container>
+                                                                                 </tr>
+                                                                               </thead>
+                                                                               <tbody *ngFor="let d of log">
+                                                                                   <tr>
+                                                                                        <td><b>{{d.author.login}}</b></td> 
+                                                                                        
+                                                                                           <td  *ngFor="let c of d.weeks.reverse()"  > <div class="trs">
+                                                                                               
+                                                                                          <ng-container *ngIf="c.c>0 && c.c<5" >{{c.c}}</ng-container>
+                                                                                        </div>
+                                                                                        <div class="mtrs">
+                                                                                          <ng-container *ngIf="c.c>=5 && c.c<10" >{{c.c}}</ng-container>
+                                                                                           </div>
+                                                                                           <div class="htrs">
+                                                                                                <ng-container *ngIf="c.c>=10" >{{c.c}}</ng-container>
+                                                                                               </div>
+                                                                                 </td>
+                                                                                </tr> 
+                                                                             
+                                                                               </tbody>
+                                                                              
+                                                                             </table>
+                                                                           
+                                                                       </div>
+                                                                    <!--   <div class="col-md-9">
+                                                                            <table class="table table-striped">
+                                                                                <thead>
+                                                                                  <tr>
+                                                                                   
+                                                                                    <th>Date</th>
+                                                                                    <th>days[M,T,W,T,F,S,S]</th>
+                                                                                   
+                                                                                    <th>total</th>
+                                                                                  </tr>
+                                                                                </thead>
+                                                                                <tbody *ngFor="let a of con">
+                                                                                      
+                                                                                  <tr *ngFor="let b of a.days">
+                                                                                        
+                                                                                    <td>{{a.week * 1000 | date:'dd-MM-yyyy '}}</td>
+                                                                                    <td >{{b}}</td>
+                                                                            
+                                                                                    <td>{{a.total}}</td>
+                                                                                </tr> 
+                                                                                    
+                                                                                </tbody>
+                                                                              </table>
+                                                                            
+                                                                        </div>-->
+                                                                         
+                                                                   </div> 
+                                                                  
+                                                            </div> 
+                                                            <hr />  
+                                                           
+                                    </div>           
+                            </li>              
+                             
+                  </ul>
+                  
+</div>
+
+              
