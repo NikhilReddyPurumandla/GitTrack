@@ -7,6 +7,7 @@ export class GithubService{
     private sdate='';
     private edate='';
     private orgname='';
+    private orgrepo='';
     private username = '';
     private repo='';
     private date='';
@@ -42,6 +43,9 @@ export class GithubService{
     
     updateOrgname(orgname:string){
         this.orgname = orgname;
+    }
+    updateOrgrepo(orgrepo:string){
+        this.orgrepo = orgrepo;
     }
     getContributors(){
          return this._http.get( 'https://api.github.com/repos/'+this.username +'/'+this.repo+'/contributors?client_id='+this.client_id+'&client_secret='+this.client_secret)
@@ -95,6 +99,10 @@ export class GithubService{
     }
     getLog(){
         return this._http.get('https://api.github.com/repos/'+ this.username+'/'+this.repo+'/stats/contributors?client_id='+this.client_id+'&client_secret='+this.client_secret)
+        .map(res => res.json())    
+    }
+    getLogs(){
+        return this._http.get('https://api.github.com/repos/'+ this.orgname+'/'+this.orgrepo+'/stats/contributors?client_id='+this.client_id+'&client_secret='+this.client_secret)
         .map(res => res.json())    
     }
     getCon(){

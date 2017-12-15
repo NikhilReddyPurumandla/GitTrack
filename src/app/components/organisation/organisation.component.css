@@ -157,3 +157,42 @@ h1, h3{
       width:90%;
       padding: 10px;
     }
+    table{
+        
+        overflow:auto;
+        display:block;
+        }
+        td[value="0"] {
+            color:#98FB98	;
+        }
+        .ntrs{
+            background-color:#949993;
+            height:100%;
+            width:100%;
+            text-align:center;
+        }
+        .trs{
+            background-color:#aef801;
+            height:100%;
+            width:100%;
+            text-align:center;
+        }
+        .mtrs{
+            background-color:#08ff46;
+            height:100%;
+            width:100%;
+            text-align:center;
+        }
+        .htrs{
+            background-color:#127e06;
+            height:100%;
+            width:100%;
+            text-align:center;
+        }
+        th{
+            font-size: 10px;
+        }
+        td{
+             font-size: 12px;
+        }
+        
