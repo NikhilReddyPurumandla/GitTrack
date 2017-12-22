@@ -1,0 +1,67 @@
+
+
+ 
+ 
+ 
+ <div id="id01" class="modal">
+	
+		
+		
+		  <form class="modal-content animate" action="add" method="post">
+			<div class="container">
+			<div class="col-xs-12 col-md-12"> 
+				  
+		 <h3><b>Signup For GitTracker</b></h3>
+			
+			  <input type="text" class="form-control" name="mail" placeholder="Mail Id"/>  
+		<br>
+		<br>
+			  <input type="password" class="form-control" name="name" placeholder=" Password"/>
+		
+		<br><br>
+			
+				<button type="cancel" class="btn btn-danger col-xs-2 col-md-2 a" onclick="document.getElementById('id01').style.display='none'"style="  margin-right: 0.2cm;">Cancel</button>
+				<button type="Submit" class="btn btn-success col-xs-2 col-md-2 a" >Signup</button>
+			
+		 </div> </div></form>
+			</div>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="form_bg">
+				<form method="post" action="LoginServlet">
+					 <h2 class="text-center">GitTracker Login</h2>
+					<br/>
+					<div class="form-group" >
+						<input type="email" class="form-control" name="email" placeholder="User id" required>
+					</div>
+					<div class="form-group">
+							<input type="password" class="form-control" name="pass" placeholder="password" required>
+						</div>
+					
+	<div class="form-group">
+	<a onclick="document.getElementById('id01').style.display='block'">create new account</a>
+	</div>
+					   <div class="align-center">
+					<button type="submit" class="btn btn-success" >Login</button>
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	
