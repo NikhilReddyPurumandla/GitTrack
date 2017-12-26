@@ -6,6 +6,7 @@ import {GithubService} from '../../services/github.service';
     moduleId:module.id,
     selector: 'github',
     templateUrl: 'github.component.html',
+    styleUrls: ['./github.component.css'],
     providers:[GithubService]
 })
 export class GithubComponent { 

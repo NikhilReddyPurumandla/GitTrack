@@ -1,0 +1,34 @@
+.vertical-menu {
+    background-color: grey;
+    height: 100%;
+    width: 80%;
+    padding-top: 30px;
+    }
+    .vertical-menu #bttn,#bttn1,#bttn2{
+
+    color: white;
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+   
+ 
+    }
+    #bttn:hover{background-color:rgb(96, 97, 96);}
+    #bttn1:hover{background-color:rgb(96, 97, 96);}
+    #bttn2:hover{background-color:rgb(96, 97, 96);}
+    body{
+        height: 100%;
+     
+        }
+        .display{
+           
+            height: 91%;
+            overflow:scroll;   
+        }
+      .vertical-menu{
+          margin-left: -26;
+      }
+      .commit{
+          overflow: auto;
+      }
+    

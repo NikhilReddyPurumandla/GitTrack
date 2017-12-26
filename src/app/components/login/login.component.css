@@ -4,13 +4,14 @@
 	position: absolute;
  } 
 	 
- input[type=text], input[type=password] {
-	 width: 308px;
+ input[type=email], input[type=password] {
+	 width: 300px;
 	
 	 margin: 8px 0;
 	 display: inline-block;
 	 border: 1px solid #ccc;
 	 box-sizing: border-box;
+
  }
  .container {
 	 padding: 20px;
@@ -63,7 +64,7 @@
     border-radius:50px;
 	margin: 0;
     padding: 0;
-
+	background: rgb(255, 255, 255);
     border:1px solid teal;
     width: 350px;
     height: 300px;

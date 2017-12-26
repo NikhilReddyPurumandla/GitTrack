@@ -105,9 +105,11 @@ h1, h3{
 }
 .tab {
     display: block;
-  
-    overflow: hidden;
+    
+    
     white-space: nowrap;
+    
+    
     
 }
 
@@ -115,6 +117,7 @@ h1, h3{
     width:1500px;
     position: relative;
     display: inline-block;
+    
 }
 
 table{
@@ -132,13 +135,13 @@ td[value="0"] {
     text-align:center;
 }
 .trs{
-    background-color:#9bff8e;
+    background-color:#b3ffa9;
     height:100%;
     width:100%;
     text-align:center;
 }
 .mtrs{
-    background-color:#5af527;
+    background-color:#39ca05;
     height:100%;
     width:100%;
     text-align:center;
@@ -155,3 +158,37 @@ th{
 td{
      font-size: 12px;
 }
+.vertical-menu {
+    background-color: grey;
+    height: 100%;
+    width: 80%;
+    padding-top: 30px;
+    }
+    .vertical-menu #bttn,#bttn1,#bttn2{
+
+    color: white;
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+   
+ 
+    }
+    #bttn:hover{background-color:rgb(96, 97, 96);}
+    #bttn1:hover{background-color:rgb(96, 97, 96);}
+    #bttn2:hover{background-color:rgb(96, 97, 96);}
+    body{
+        height: 100%;
+     
+        }
+        .display{
+           
+            height: 91%;
+            overflow:scroll;   
+        }
+      .vertical-menu{
+          margin-left: -26;
+      }
+      .commit{
+          overflow: auto;
+      }
+    

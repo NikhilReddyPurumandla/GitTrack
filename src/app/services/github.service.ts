@@ -13,7 +13,8 @@ export class GithubService{
     private date='';
     private client_id = '41b7681364679e30d325';
     private client_secret='c32185af65cee9f03f1622e973f9840496e0c80c';
-    
+    private user='';
+    private pass='';
     constructor(private _http:Http){
      
     }
@@ -27,7 +28,12 @@ export class GithubService{
         return this._http.get('https://api.github.com/users/'+this.username+'/repos?client_id='+this.client_id+'&client_secret='+this.client_secret)
             .map(res => res.json());
     }
-    
+    updateUser(user:string){
+        this.user=user;
+    }
+    updatePass(pass:string){
+        this.pass=pass;
+    }
     updateUsername(username:string){
         this.username = username;
     }
@@ -112,5 +118,18 @@ export class GithubService{
     getMembers(){
         return this._http.get('https://api.github.com/orgs/' + this.orgname + '/members?client_id='+this.client_id+'&client_secret='+this.client_secret)
         .map(res => res.json())  
+    }
+    addMember(event){
+        console.log("backend name",event.mail);
+        console.log("backend password",event.pass);
+        return this._http.post('http://localhost:8080/git/addUser',event)
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );
     }
 }

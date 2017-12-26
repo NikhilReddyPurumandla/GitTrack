@@ -8,6 +8,7 @@
     display: block;
     padding: 12px;
     text-decoration: none;
+    margin-left: 1px;
  
     }
     #bttn:hover{background-color:rgb(96, 97, 96);}
@@ -22,4 +23,6 @@
             height: 90%;
             overflow:auto;   
         }
-       
+       .navbar{
+           margin-bottom: 12px;
+       }

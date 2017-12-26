@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 import {GithubComponent} from './components/github/github.component';
@@ -25,7 +26,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, FormsModule,ChartsModule, RouterModule.forRoot(routes)],
+  imports: [ BrowserModule, HttpModule, FormsModule,ChartsModule, RouterModule.forRoot(routes),  ReactiveFormsModule],
   declarations: [ AppComponent, GithubComponent, StatusComponent, OrganisationComponent, LoginComponent ],
   bootstrap: [ AppComponent ]
 })
