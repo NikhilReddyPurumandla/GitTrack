@@ -63,7 +63,7 @@ export class StatusComponent implements OnInit {
    con:any;
    a:any=[];
    a1:any=[];
-  
+    
   close() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
@@ -95,12 +95,16 @@ getDate(){
    this.arr1.length=0;
    this.a.length=0;
    this.a1.length=0;
+   console.log("user adding repo ",this.username);
+   this._githubService.addRepo(this.username);
    
     this._githubService.updateUsername(this.username.split('/')[3]);
     this._githubService.updateRepo(this.username.split('/')[4]);
     this._githubService.getContributors().subscribe(user => {
       this.user = user;
   });
+
+  
 
   this._githubService.getDate().subscribe(day => {
     this.day = day;

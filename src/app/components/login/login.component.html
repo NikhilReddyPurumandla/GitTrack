@@ -7,21 +7,21 @@
 	
 		
 		
-		  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+		  <form class="modal-content animate" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
 			<div class="container">
 			<div class="col-xs-12 col-md-12"> 
 				  
 		 <h3><b>Signup For GitTracker</b></h3>
 			
-			  <input type="email" class="form-control" formControlName="email"  placeholder="Mail Id"/>  
+			  <input type="email" class="form-control" formControlName="email"  placeholder="Mail Id" required>  
 		<br>
 		<br>
-			  <input type="password" class="form-control" formControlName="password" placeholder=" Password"/>
+			  <input type="password" class="form-control" formControlName="username" placeholder=" Password"required>
 		
 		<br><br>
 			
 				<button type="cancel" class="btn btn-danger col-xs-2 col-md-2 a" onclick="document.getElementById('id01').style.display='none'"style="  margin-right: 0.2cm;">Cancel</button>
-				<button type="Submit" class="btn btn-success col-xs-2 col-md-2 a" >Signup</button>
+				<button type="submit" class="btn btn-success col-xs-2 col-md-2 a"onclick="document.getElementById('id01').style.display='none'">Signup</button>
 			
 		 </div> </div></form>
 			</div>
@@ -43,14 +43,14 @@ window.onclick = function(event) {
 		<div class="row col-md-5"></div>
 		<div class="row col-md-6"><br><br><br>
 			<div class="form_bg">
-				<form method="post" action="LoginServlet">
+				<form   action="/login.component.html" [formGroup]="form" (ngSubmit)="onSubmits(form.value)">
 					 <h2 class="text-center">GitTracker Login</h2>
 					<br/>
 					<div class="form-group" >
-						<input type="email" class="form-control"[(ngModel)]="email" name="email" placeholder="User id" required>
+						<input type="email" class="form-control" formControlName="email"  placeholder="User id" required>
 					</div>
 					<div class="form-group">
-							<input type="password" class="form-control" [(ngModel)]="pass" name="pass" placeholder="password" required>
+							<input type="password" class="form-control" formControlName="username" placeholder="password" required>
 						</div>
 					
 	<div class="form-group">

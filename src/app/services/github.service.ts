@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, RequestOptions,Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class GithubService{
@@ -15,11 +16,14 @@ export class GithubService{
     private client_secret='c32185af65cee9f03f1622e973f9840496e0c80c';
     private user='';
     private pass='';
+   
     constructor(private _http:Http){
      
     }
     
     getUser(){
+  
+        
         return this._http.get('https://api.github.com/users/'+this.username+'?client_id='+this.client_id+'&client_secret='+this.client_secret)
             .map(res => res.json());
     }
@@ -61,6 +65,7 @@ export class GithubService{
         
             return this._http.get('https://api.github.com/repos/' + this.username + '/' + this.repo + '/commits?client_id='+this.client_id+'&client_secret='+this.client_secret)
             .map(res => res.json());
+            
     }
     getBranches() {
             
@@ -113,19 +118,48 @@ export class GithubService{
     }
     getCon(){
         return this._http.get('https://api.github.com/repos/'+ this.username+'/'+this.repo+'/stats/commit_activity?client_id='+this.client_id+'&client_secret='+this.client_secret)
-        .map(res => res.json())  
+        .map(res => res.json()) 
+
     }
     getMembers(){
         return this._http.get('https://api.github.com/orgs/' + this.orgname + '/members?client_id='+this.client_id+'&client_secret='+this.client_secret)
         .map(res => res.json())  
     }
     addMember(event){
-        console.log("backend name",event.mail);
-        console.log("backend password",event.pass);
+        console.log("backend name",event.email);
+        console.log("backend password",event.username);
         return this._http.post('http://localhost:8080/git/addUser',event)
         .subscribe(
           res => {
             console.log(res);
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );
+    }
+    login(event){
+        console.log("login name",event.email);
+        console.log("login password",event.username);
+        return this._http.post('http://localhost:8080/git/getLogin',event)
+        .subscribe(
+          res => {
+            console.log(res);
+            console.log("logged in with username ",event.email," and password ",event.username);
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );
+    }
+
+    addRepo(event){
+      //  console.log("adding repo ",repouser);
+        return this._http.post('http://localhost:8080/git/addRepo',event)
+        .subscribe(
+          res => {
+            console.log(res);
+            console.log("added repo",event);
           },
           err => {
             console.log("Error occured");

@@ -28,27 +28,36 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   
   
-form;  
- mail:string;
-pass:string;
+  form;  
+ email:string;
+username:string;
 user:any=[];
   
-  constructor(private _githubService:GithubService){
-    
-}
+constructor(private route: ActivatedRoute,
+  private router: Router,private githubService:GithubService) {
+ }
 
 ngOnInit() {
+  this.form = new FormGroup({
+    email : new FormControl("", Validators.required),
+    username : new FormControl("", Validators.required),
+
+  });
 }
-this.form = new FormGroup({
-  email : new FormControl("", Validators.required),
-  password : new FormControl("", Validators.required),
- 
-});
+
 onSubmit = function(event){
-  event.maiil= this.mail;
-  event.password=this.pass
-  this.eventservice.addUser(event);
+  //event.email= this.email;
+  //event.password=this.password;
+  this.githubService.addMember(event);
   console.log(event);
+
+ };
+ onSubmits = function(event){
+  //event.email= this.email;
+  //event.password=this.password;
+  this.githubService.login(event);
+  console.log(event);
+
  };
 
 
