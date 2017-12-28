@@ -3,6 +3,8 @@ import {GithubService} from '../../services/github.service';
 import { ChartsModule } from 'ng2-charts';
 import {  Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -25,7 +27,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class StatusComponent implements OnInit {
   barChartOptions: any;
-
+form;
   user:any;
   branch:any;
   commit:any;
@@ -39,9 +41,10 @@ export class StatusComponent implements OnInit {
   e:boolean;
   f:any;
   g:any;
-
-
-  username:string;
+  x:any;
+abc=[]
+emptyArray=[]
+  username:any;
   barChartLabels:any;
   barChartType:any;
   barChartLegend:boolean;
@@ -63,19 +66,43 @@ export class StatusComponent implements OnInit {
    con:any;
    a:any=[];
    a1:any=[];
-    
+    repos:any;
   close() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
   }
-  constructor(private _githubService:GithubService){
-        
-  }
+  constructor(private route: ActivatedRoute,
+    private router: Router,private _githubService:GithubService) {
+   }
 
   ngOnInit() {
-    
+    this.form = new FormGroup({
+      repo : new FormControl("", Validators.required),
+ 
+  
+    });
+    this._githubService.getRepo().subscribe(repo => {
+      this.repo = repo;
+      console.log("repos list",repo);
+      for(let i=0;i<repo.length;i++){
+        this.abc.push(repo[i].repo);
+      }
+    });
 }
 
+onSubmit = function(event){
+  console.log(event);
+  this._githubService.addRepo(event);
+ 
+  this._githubService.getRepo().subscribe(repo => {
+    this.repo = repo;
+   for(let i=0;i<repo.length;i++){
+     this.abc.push(repo[i].repo);
+   }
+    console.log("repos list",repo);
+   
+  });
+ }; 
 
 getDate(){
   
@@ -90,16 +117,15 @@ getDate(){
 }
    
   getDetails(){
-   
+   if(this.username){
    this.arr.length=0;
    this.arr1.length=0;
    this.a.length=0;
    this.a1.length=0;
-   console.log("user adding repo ",this.username);
-   this._githubService.addRepo(this.username);
-   
-    this._githubService.updateUsername(this.username.split('/')[3]);
-    this._githubService.updateRepo(this.username.split('/')[4]);
+   this.x=this.username[0].display.value;
+   console.log("user name is",this.username[0].display);
+    this._githubService.updateUsername(this.username[0].display.split('/')[3]);
+    this._githubService.updateRepo(this.username[0].display.split('/')[4]);
     this._githubService.getContributors().subscribe(user => {
       this.user = user;
   });
@@ -242,8 +268,166 @@ this._githubService.getGraph().subscribe(graph => {
       });
     
 });
+   }
+else{
 
 
+
+  this.arr.length=0;
+  this.arr1.length=0;
+  this.a.length=0;
+  this.a1.length=0;
+ 
+  console.log("else user name is",this.username);
+   this._githubService.updateUsername(this.username.split('/')[3]);
+   this._githubService.updateRepo(this.username.split('/')[4]);
+   this._githubService.getContributors().subscribe(user => {
+     this.user = user;
+ });
+
+ 
+
+ this._githubService.getDate().subscribe(day => {
+   this.day = day;
+  
+ });
+  
+ this._githubService.getLog().subscribe(log=>{
+   this.log=log;
+
+   })
+ this._githubService.getCommits().subscribe(commit => {
+     this.commit = commit;
+
+ });
+ this._githubService.getBranches().subscribe(branch => {
+   this.branch = branch;
+  
+});
+this._githubService.getLang().subscribe(lang => {
+ this.lang = lang;
+
+});
+this._githubService.getC().subscribe(c=>{
+this.c=c;
+
+
+
+})
+
+
+
+this._githubService.getP().subscribe(p=>{
+ this.p=p;
+ console.log("p:",p);
+
+ })
+ this._githubService.getYear().subscribe(year=>{
+   this.year=year;
+
+ 
+   
+   })
+
+   
+this._githubService.getGraph().subscribe(graph => {
+ this.graph = graph;
+  this.barChartOptions = {
+   scaleShowHorizontalLines: false,
+   scaleShowVerticalLines: false,
+   responsive: true
+   };
+   
+ for (let num of graph){
+ 
+   this.arr.push(num.login);
+   let x: any= this.arr;
+   this.barChartLabels = x;
+
+  
+  this.barChartType = 'bar';
+  this.barChartLegend= true;
+
+  this.arr1.push(num.contributions),
+  this.barChartData = [
+   
+    {data: this.arr1, label: 'Contributions'},
+   
+  ];
+  
+ 
+  
+      
+     }
+
+
+
+
+     
+     this._githubService.getCon().subscribe(con => {
+       this.con = con;
+        this.g = {
+         scaleShowVerticalLines: false,
+         responsive: true
+         };
+         function convertTimestamp(timestamp) {
+           var d = new Date(timestamp * 1000),	// Convert the passed timestamp to milliseconds
+             yyyy = d.getFullYear(),
+             mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+             dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.
+             hh = d.getHours(),
+             h = hh,
+             min = ('0' + d.getMinutes()).slice(-2),		// Add leading 0.
+             ampm = 'AM',
+             time;
+               
+           if (hh > 12) {
+             h = hh - 12;
+             ampm = 'PM';
+           } else if (hh === 12) {
+             h = 12;
+             ampm = 'PM';
+           } else if (hh == 0) {
+             h = 12;
+           }
+           
+           // ie: 2013-02-18, 8:35 AM	
+           time = dd + '-' + mm + '-' + yyyy ;
+             
+           return time;
+         }
+       for (let k of con){
+         
+       
+       let m= convertTimestamp(k.week);
+      
+         this.a.push(m);
+         let y: any= this.a;
+         this.b = y;
+     
+        
+        this.d = 'bar';
+        this.e= true;
+     
+        this.a1.push(k.total),
+        this.f = [
+         
+          {data: this.a1, label: 'Contributions'},
+         
+        ];
+        
+            
+           }
+            
+         
+     });
+   
+});
+
+
+
+
+}
     }
     public chartClicked(e:any):void {
       console.log(e);
@@ -252,6 +436,5 @@ this._githubService.getGraph().subscribe(graph => {
       public chartHovered(e:any):void {
       console.log(e);
       }
-
-      
+  
 }

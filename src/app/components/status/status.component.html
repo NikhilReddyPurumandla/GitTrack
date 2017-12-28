@@ -3,8 +3,53 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="id01" class="modal">
+   <form class="modal-content animate" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" >
+                <div class="container" >
+                <div class="col-xs-12 col-md-12"> 
+                      
+            <header><h4><b>Add Repo</b></h4></header> 
+                
+                  <input type="email" class="form-control" formControlName="repo"  placeholder="Repo Url" >  
+            
+            <button class="btn btn-primary" type="submit">Add</button>
+        
+            <table  class="table  table-stripped table-bordered"  style="width:35%">
+            
+            <thead >
+                <tr >
+                    <th><h4><b>Repos</b></h4></th>
+                
+                  </tr>
+             
+                </thead>
+                <tbody  *ngFor="let use of repo">
+                    <tr >
+                         <td id="username" onclick="document.getElementById('id01').style.display='none'"><b>{{use.repo}} </b></td> 
+                         
+                 </tr> 
+                </tbody>
+           
+               
+              </table>
+                        
+                
+             </div> </div></form>
+                </div>
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+    
 <div class="row"> 
-   
                      <div class="col-md-12">
                 <div class="col-md-3">
                     
@@ -17,12 +62,16 @@
                     </div>
 
             <div class="form-group col-md-5">
-                
-                <input type="text" class="form-control" placeholder="Github Repo Url" [(ngModel)]="username" name="username" ng-required="username">    
+  <input type="text" class="form-control" placeholder="Github Repo Url" [(ngModel)]="username" name="username"  id="username" > 
+               <tag-input  [(ngModel)]='username' name="username" [ngModelOptions]="{standalone: true}" [onlyFromAutocomplete]="true" >
+                        <tag-input-dropdown [autocompleteItems]='abc' [showDropdownIfEmpty]="true">
+                        </tag-input-dropdown>
+                        </tag-input>  
             </div>  <div>  <button (click)=getDetails() class="btn btn-primary" type="submit">search</button> 
-            
+                <button class="btn btn-warning"  onclick="document.getElementById('id01').style.display='block'" style="float: right;width:auto;">Add Repo</button> 
             </div>
-   
+ 
+
            <div *ngIf="user"  class="col-md-9 display">
                 <ul class="tabs " >
                     

@@ -154,7 +154,7 @@ export class GithubService{
     }
 
     addRepo(event){
-      //  console.log("adding repo ",repouser);
+        console.log("adding repo ",event);
         return this._http.post('http://localhost:8080/git/addRepo',event)
         .subscribe(
           res => {
@@ -166,4 +166,11 @@ export class GithubService{
           }
         );
     }
+    
+    getRepo(){
+        return this._http.get('http://localhost:8080/git/getRepo')
+        .map(res => res.json())  
+    }
+
+    
 }

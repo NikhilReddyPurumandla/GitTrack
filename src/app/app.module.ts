@@ -11,6 +11,9 @@ import { ChartsModule } from 'ng2-charts';
 import { RouterModule, Routes } from '@angular/router';
 import { OrganisationComponent } from './components/organisation/organisation.component';
 import { LoginComponent } from './components/login/login.component';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
 
 const routes: Routes = [
   { path: 'status', component: StatusComponent },
@@ -26,7 +29,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, FormsModule,ChartsModule, RouterModule.forRoot(routes),  ReactiveFormsModule],
+  imports: [ BrowserModule, HttpModule, FormsModule,ChartsModule,TagInputModule, BrowserAnimationsModule, RouterModule.forRoot(routes),  ReactiveFormsModule],
   declarations: [ AppComponent, GithubComponent, StatusComponent, OrganisationComponent, LoginComponent ],
   bootstrap: [ AppComponent ]
 })
