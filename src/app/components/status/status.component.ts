@@ -100,22 +100,23 @@ emptyArray=[]
 click(event){
 console.log("event",event);
   let a= document.getElementById("usernames").getAttribute("value");
-  console.log("a is",a);
   document.getElementById("usernameid").setAttribute("value",event);
   document.getElementById('id01').style.display='none';
 
 }
+delete(event){
+  console.log("to be deleted event",event);
+  this._githubService.deleteRepo(event);
+  
+  }
 onSubmit = function(event){
-  console.log(event);
+  console.log("delete ",event);
   this._githubService.addRepo(event);
  
   this._githubService.getRepo().subscribe(repo => {
     this.repo = repo;
    
-   for(let i=0;i<repo.length;i++){
-     this.abc.push(repo[i].repo);
-   }
-    console.log("repos list",repo);
+   
    
   });
  }; 

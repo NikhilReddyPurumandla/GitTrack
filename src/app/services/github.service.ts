@@ -171,6 +171,10 @@ export class GithubService{
         return this._http.get('http://localhost:8080/git/getRepo')
         .map(res => res.json())  
     }
-
+    deleteRepo(event){
+        console.log("service delete",event);
+        return this._http.post('http://localhost:8080/git/deleteRepo',event)
+        .map(res => res.json())   
+    }
     
 }

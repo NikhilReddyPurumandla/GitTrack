@@ -18,31 +18,36 @@
             <button class="btn btn-primary" type="submit">Add</button>
         
            
-             </div> </div></form>
-             <form  [formGroup]="form1" (ngSubmit)="onSubmits(form1.value)" >
-             <table  class="table   table-bordered"  style="width:99%">
+             </div> </div>
+             <form  [formGroup]="form1">
                     
-                    <thead >
-                        <tr >
-                            <th bgcolor="gainsboro"><h4><b>Repos</b></h4></th>
-                        
-                          </tr>
-                     
-                        </thead>
-                        <tbody  *ngFor="let use of repo">
-                            <tr >
-                                 <td><input type="text"  formControlName="usernames"  id="usernames" value="{{use.repo}}" readonly>
-                                    <button  (click)=click(use.repo)>click</button>
-                                </td> 
-                                
-                         </tr> 
-                         
-                        </tbody>
-                   
+                <table width="800" class="table table-stripped table-bordered" >
                        
-                      </table>
+                       <thead >
+                           <tr>
+                               <th  bgcolor="gainsboro"   ><h4><b>Saved Repos</b></h4></th>
+                           
+                             </tr>
+                        
+                           </thead>
+                           <tbody *ngFor="let use of repo">
+                               <tr>
+                                    <td ><input style="border:none" size="60"type="text" width="600" formControlName="usernames"  id="usernames" value="{{use.repo}}" readonly>
+                                       <button class="btn btn-success"   (click)=click(use.repo)><i class="glyphicon glyphicon-search"></i> </button>
+                                       <button class="btn btn-danger"   (click)=delete(use.repo)><i class="glyphicon glyphicon-remove"></i></button>
+                                   </td> 
+                                   
+                            </tr> 
                             
-                     </form>
+                           </tbody>
+                      
+                          
+                         </table>
+                               
+                        </form>
+            </form>
+            
+             
                 </div>
     
 
@@ -68,7 +73,7 @@
                         </tag-input-dropdown>
                         </tag-input>  -->
             </div>  <div>  <button (click)=getDetails() class="btn btn-primary" type="submit">search</button> 
-                <button class="btn btn-warning"  onclick="document.getElementById('id01').style.display='block'" style="float: right;width:auto;">Add Repo</button> 
+                <button class="btn btn-warning"  onclick="document.getElementById('id01').style.display='block'" style="float: right;width:auto;">your Repos</button> 
             </div>
  
 
