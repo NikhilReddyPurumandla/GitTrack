@@ -64,30 +64,7 @@ h1, h3{
     opacity: 1;
     transition: opacity 400ms ease-out;
 }
-.modal {
-    display: none;
-    position: bottom;
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-    padding-top: 60px;
-}
 
-.modal-content {
-    
-    opacity: 1;
-    transition: opacity 400ms ease-out;
-    background-color: #fefefe;
-    margin: 5% auto 15% auto;
-    border: 1px solid #888;
-    width: 35%; 
-    height: 35%;
-}
 
 .close {
     position: right;
@@ -237,13 +214,13 @@ td{
          position: absolute;
          right: 15px;
          top: 10px;
-         color: #ff3c00;
+         color:#0e0d0c;
          font-size: 30px;
          font-weight: bold;
      }
      .close:hover,
      .close:focus {
-         color: rgb(49, 49, 51);
+         color: rgb(243, 16, 0);
          cursor: pointer;
      }
      .my-container img {

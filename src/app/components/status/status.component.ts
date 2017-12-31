@@ -69,6 +69,7 @@ emptyArray=[]
    a1:any=[];
     repos:any;
     giturl:any;
+    public data:any;
   close() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
@@ -80,23 +81,27 @@ emptyArray=[]
   ngOnInit() {
     this.form = new FormGroup({
       repo : new FormControl("", Validators.required),
- 
-  
     });
     this.form1 = new FormGroup({
       usernames : new FormControl("", Validators.required),
- 
-  
-    });
+      
+        });
     
     this._githubService.getRepo().subscribe(repo => {
       this.repo = repo;
       console.log("repos list",repo);
-      for(let i=0;i<repo.length;i++){
-        this.abc.push(repo[i].repo);
-      }
+    
     });
 }
+onSubmit = function(event){
+  console.log(event);
+  this._githubService.addRepo(event);
+ 
+  this._githubService.getRepo().subscribe(repo => {
+    this.repo = repo;
+  })
+};
+
 click(event){
 console.log("event",event);
   let a= document.getElementById("usernames").getAttribute("value");
@@ -104,22 +109,21 @@ console.log("event",event);
   document.getElementById('id01').style.display='none';
 
 }
-delete(event){
-  console.log("to be deleted event",event);
-  this._githubService.deleteRepo(event);
-  
-  }
-onSubmit = function(event){
-  console.log("delete ",event);
-  this._githubService.addRepo(event);
- 
+
+delete(repo){
+  console.log("to be deleted event",repo.id);
+  confirm("Do u really want to delete ?")
+  this._githubService.deleteRepo(repo)
   this._githubService.getRepo().subscribe(repo => {
     this.repo = repo;
-   
-   
-   
-  });
- }; 
+    
+  })
+
+  
+ 
+}
+ 
+ 
 
 getDate(){
   
@@ -135,9 +139,7 @@ getDate(){
 
    
   getDetails(){
-this.giturl=document.getElementById("usernameid").getAttribute("value");
-
-   
+   this.giturl=document.getElementById("usernameid").getAttribute("value");
    this.arr.length=0;
    this.arr1.length=0;
    this.a.length=0;
@@ -150,7 +152,10 @@ this.giturl=document.getElementById("usernameid").getAttribute("value");
       this.user = user;
   });
 
-  
+  this._githubService.getLog().subscribe(log=>{
+    this.log=log;
+
+    })
 
   this._githubService.getDate().subscribe(day => {
     this.day = day;

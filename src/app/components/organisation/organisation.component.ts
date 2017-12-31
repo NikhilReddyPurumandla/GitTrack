@@ -3,7 +3,7 @@ import {GithubService} from '../../services/github.service';
 import { ChartsModule } from 'ng2-charts';
 import {  Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   moduleId:module.id,
@@ -24,6 +24,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ]
 })
 export class OrganisationComponent implements OnInit {
+  form;
+  form1;
+  repo:any;
   orgname:string;
   orgrepo:string;
   org:any;
@@ -36,9 +39,48 @@ export class OrganisationComponent implements OnInit {
 }
 
   ngOnInit() {
- 
+    this.form = new FormGroup({
+      repo : new FormControl("", Validators.required),
+    });
+    this.form1 = new FormGroup({
+      usernames : new FormControl("", Validators.required),
+      
+        });
+    
+    this._githubService.getRepo().subscribe(repo => {
+      this.repo = repo;
+      console.log("repos list",repo);
+    
+    });
   
   }
+  onSubmit = function(event){
+    console.log(event);
+    this._githubService.addRepo(event);
+   
+    this._githubService.getRepo().subscribe(repo => {
+      this.repo = repo;
+    })
+  };
+  
+  click(event){
+  console.log("event",event);
+    let a= document.getElementById("usernames").getAttribute("value");
+    document.getElementById("usernameid").setAttribute("value",event);
+    document.getElementById('id01').style.display='none';
+  
+  }
+  
+  delete(repo){
+    console.log("to be deleted event",repo.id);
+    confirm("Do u really want to delete ?")
+    this._githubService.deleteRepo(repo)
+    this._githubService.getRepo().subscribe(repo => {
+      this.repo = repo;
+      
+    })
+  }
+  
   getRes(){
     
      this._githubService.updateOrgname(this.orgname.split('/')[3]);

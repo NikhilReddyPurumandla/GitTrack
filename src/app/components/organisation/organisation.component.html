@@ -3,6 +3,64 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div id="id01" class="modal">
+        
+<form class="modal-content animate" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" >
+         
+<div class="container col-xs-12 col-md-12" >
+          <div > 
+                  <button type="button" class="close" onclick="document.getElementById('id01').style.display='none'">&times;</button>    
+      <header><h4><b>Add Repo</b></h4></header> 
+          
+            <input type="email" class="form-control" formControlName="repo"  placeholder="Repo Url" >  
+      
+      <button class="btn btn-primary" type="submit">Add</button>
+  
+     
+       </div> </div>
+       <form  [formGroup]="form1"  >
+              
+          <table width="800" class="table table-stripped table-bordered" >
+                 
+                 <thead >
+                     <tr>
+                         <th  bgcolor="gainsboro"   ><h4><b>Saved Repos</b></h4></th>
+                     
+                       </tr>
+                  
+                     </thead>
+                     <tbody *ngFor="let use of repo">
+                         <tr>
+                              <td >
+                     
+
+                                  <input style="border:none" size="60"type="text" width="600" formControlName="usernames"  id="usernames" value="{{use.repo}}" readonly>
+                                 <button class="btn btn-success"   (click)=click(use.repo)><i class="glyphicon glyphicon-search"></i> </button>
+                                 <button  class="btn btn-danger"  (click)=delete(use.id)  ><i class="glyphicon glyphicon-remove"></i></button>
+                               </td> 
+                             
+                      </tr> 
+                      
+                     </tbody>
+                
+                    
+                   </table>
+                         
+                  </form>
+      </form>
+      
+       
+          </div>
+
+
+
+  
+
+
+
+
+
 <div class="row"> 
         
                           <div class="col-md-12">
@@ -18,7 +76,7 @@
             <div class="form-group col-md-5">
                     <input type="text" class="form-control" placeholder="Github Organisation Url" [(ngModel)]="orgname" name="orgname">    
                 </div>  <div>  <button (click)=getRes() class="btn btn-primary" type="submit">search</button> 
-                
+                    <button class="btn btn-warning"  onclick="document.getElementById('id01').style.display='block'" style="float: right;width:auto;">Repos</button> 
                 </div>
                 <div *ngIf="org" class="col-md-9 display">
                   

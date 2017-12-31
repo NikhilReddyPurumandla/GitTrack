@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions,Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class GithubService{
     private sdate='';
@@ -171,10 +170,19 @@ export class GithubService{
         return this._http.get('http://localhost:8080/git/getRepo')
         .map(res => res.json())  
     }
-    deleteRepo(event){
-        console.log("service delete",event);
-        return this._http.post('http://localhost:8080/git/deleteRepo',event)
-        .map(res => res.json())   
+    deleteRepo(repo){
+        console.log("service delete",repo);
+        return this._http.delete('http://localhost:8080/git/deleteRepo/'+repo)
+        .subscribe(
+            res => {
+              console.log(res);
+              console.log("deleted repo",repo);
+            },
+            err => {
+              console.log("Error occured");
+            }
+          );   
+          
     }
     
 }
