@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptions,Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Injectable()
 export class GithubService{
@@ -16,7 +17,9 @@ export class GithubService{
     private user='';
     private pass='';
    
-    constructor(private _http:Http){
+    
+    constructor(private _http:Http,private route: ActivatedRoute,
+        private router: Router){
      
     }
     
@@ -140,16 +143,20 @@ export class GithubService{
     login(event){
         console.log("login name",event.email);
         console.log("login password",event.username);
+        if(event.email!="" && event.username!=""){
         return this._http.post('http://localhost:8080/git/getLogin',event)
         .subscribe(
           res => {
             console.log(res);
             console.log("logged in with username ",event.email," and password ",event.username);
+            this.router.navigate(['/status'])
           },
           err => {
             console.log("Error occured");
+            this.router.navigate(['/login'])
           }
         );
+    }
     }
 
     addRepo(event){

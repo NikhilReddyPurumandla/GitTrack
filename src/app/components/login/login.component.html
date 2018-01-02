@@ -43,7 +43,7 @@ window.onclick = function(event) {
 		<div class="row col-md-5"></div>
 		<div class="row col-md-6"><br><br><br>
 			<div class="form_bg">
-				<form   action="/login.component.html" [formGroup]="form" (ngSubmit)="onSubmits(form.value)">
+				<form  [formGroup]="form" (ngSubmit)="onSubmits(form.value)">
 					 <h2 class="text-center">GitTracker Login</h2>
 					<br/>
 					<div class="form-group" >

@@ -34,6 +34,7 @@ export class OrganisationComponent implements OnInit {
   member:any;
   log:any;
   a:any=[];
+  giturl:any;
   constructor(private _githubService:GithubService){
     
 }
@@ -71,24 +72,26 @@ export class OrganisationComponent implements OnInit {
   
   }
   
-  delete(repo){
-    console.log("to be deleted event",repo.id);
-    confirm("Do u really want to delete ?")
-    this._githubService.deleteRepo(repo)
-    this._githubService.getRepo().subscribe(repo => {
-      this.repo = repo;
-      
-    })
+  
+delete(repo){
+  console.log("to be deleted event",repo.id);
+  if(confirm("Do u really want to delete ?")){
+  if(this._githubService.deleteRepo(repo)){
+  this._githubService.getRepo().subscribe(repo => {
+    this.repo = repo;
+  })
+}
+  }
   }
   
   getRes(){
-    
-     this._githubService.updateOrgname(this.orgname.split('/')[3]);
-     this._githubService.updateOrgrepo(this.orgname.split('/')[4]);
+    this.giturl=document.getElementById("usernameid").getAttribute("value");
+     this._githubService.updateOrgname(this.giturl.split('/')[3]);
+     this._githubService.updateOrgrepo(this.giturl.split('/')[4]);
  
-     console.log(this.orgname.split('/')[3]);
+     console.log(this.giturl.split('/')[3]);
 
-     console.log(this.orgname.split('/')[4]);
+     console.log(this.giturl.split('/')[4]);
     this._githubService.getOrgRepos().subscribe(org => {
        this.org = org;
        

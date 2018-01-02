@@ -110,22 +110,21 @@ console.log("event",event);
 
 }
 
+
 delete(repo){
   console.log("to be deleted event",repo.id);
-  confirm("Do u really want to delete ?")
-  this._githubService.deleteRepo(repo)
+  if(confirm("Do u really want to delete ?")){
+  if(this._githubService.deleteRepo(repo)){
   this._githubService.getRepo().subscribe(repo => {
     this.repo = repo;
-    
   })
-
-  
- 
 }
+  }
+  }
  
  
 
-getDate(){
+getDate():void{
   
   this._githubService.updateSdate(this.sdate);
 
@@ -147,6 +146,8 @@ getDate(){
  
    console.log("user name is",this.giturl);
     this._githubService.updateUsername(this.giturl.split('/')[3]);
+     console.log("user log is:" ,this.giturl.split('/')[3]);
+     console.log("repo log is:" ,this.giturl.split('/')[4]);
     this._githubService.updateRepo(this.giturl.split('/')[4]);
     this._githubService.getContributors().subscribe(user => {
       this.user = user;

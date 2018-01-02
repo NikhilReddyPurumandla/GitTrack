@@ -12,13 +12,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { OrganisationComponent } from './components/organisation/organisation.component';
 import { LoginComponent } from './components/login/login.component';
 import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-
 
 const routes: Routes = [
-  { path: 'status', component: StatusComponent },
+  { path: 'status', component: StatusComponent},
   { path: 'github', component: GithubComponent },
-  { path: 'organisation', component: OrganisationComponent },
+  { path: 'organisation', component: OrganisationComponent},
   { path: 'login', component: LoginComponent},
   {
     path:'',
@@ -29,8 +27,9 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, FormsModule,ChartsModule,TagInputModule, BrowserAnimationsModule, RouterModule.forRoot(routes),  ReactiveFormsModule],
+  imports: [ BrowserModule, HttpModule, FormsModule,ChartsModule,TagInputModule, RouterModule.forRoot(routes),  ReactiveFormsModule],
   declarations: [ AppComponent, GithubComponent, StatusComponent, OrganisationComponent, LoginComponent ],
+
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

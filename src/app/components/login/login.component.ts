@@ -5,6 +5,7 @@ import {  Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 @Component({
   moduleId:module.id,
   
@@ -27,7 +28,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 export class LoginComponent implements OnInit {
   
-  
+  loading = false;
   form;  
  email:string;
 username:string;
@@ -56,6 +57,7 @@ onSubmit = function(event){
   //event.email= this.email;
   //event.password=this.password;
   this.githubService.login(event);
+  
   console.log(event);
 
  };
