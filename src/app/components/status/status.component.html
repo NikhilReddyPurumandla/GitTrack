@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <div id="id01" class="modal">
+    <div id="id01" class="modal" >
               
    <form class="modal-content animate" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" >
                
@@ -20,7 +20,7 @@
            
              </div> </div>
              <form  [formGroup]="form1"  >
-                    
+                   
                 <table width="800" class="table table-stripped table-bordered" >
                        
                        <thead >
@@ -31,6 +31,7 @@
                         
                            </thead>
                            <tbody *ngFor="let use of repo">
+                              
                                <tr>
                                     <td >
                            
@@ -66,7 +67,8 @@
                     <a routerLink="/status" routerLinkActive="active" id="bttn" ><i class="glyphicon glyphicon-check"></i> Project Status Tracker</a><br>
                     <a routerLink="/github" routerLinkActive="active" id="bttn1"> <i class="glyphicon glyphicon-user"></i> Explore your Buddies</a><br>
                     <a routerLink="/organisation" routerLinkActive="active" id="bttn2"> <i class="fa fa-institution"></i>  Orginisation Tracker</a><br>
-                    </div>
+                    <a routerLink="/logout" routerLinkActive="active" id="bttn3" ><i class="glyphicon glyphicon-log-out"></i> logout</a><br>
+                </div>
                     </div>
 
             <div class="form-group col-md-5">
@@ -76,7 +78,7 @@
                         </tag-input-dropdown>
                         </tag-input>  -->
             </div>  <div>  <button (click)=getDetails() class="btn btn-primary" type="submit">search</button> 
-                <button class="btn btn-warning"  onclick="document.getElementById('id01').style.display='block'" style="float: right;width:auto;">Repos</button> 
+                <button class="btn btn-warning"  onclick="document.getElementById('id01').style.display='block' "   style="float: right;width:auto;">Repos</button> 
             </div>
  
 

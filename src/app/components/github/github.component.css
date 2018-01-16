@@ -4,7 +4,7 @@
     width: 80%;
     padding-top: 30px;
     }
-    .vertical-menu #bttn,#bttn1,#bttn2{
+    .vertical-menu #bttn,#bttn1,#bttn2,#bttn3{
 
     color: white;
     display: block;
@@ -16,6 +16,7 @@
     #bttn:hover{background-color:rgb(96, 97, 96);}
     #bttn1:hover{background-color:rgb(96, 97, 96);}
     #bttn2:hover{background-color:rgb(96, 97, 96);}
+    #bttn3:hover{background-color:rgb(96, 97, 96);}
     body{
         height: 100%;
      

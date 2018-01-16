@@ -140,24 +140,24 @@ export class GithubService{
           }
         );
     }
-    login(event){
-        console.log("login name",event.email);
-        console.log("login password",event.username);
-        if(event.email!="" && event.username!=""){
-        return this._http.post('http://localhost:8080/git/getLogin',event)
-        .subscribe(
-          res => {
-            console.log(res);
-            console.log("logged in with username ",event.email," and password ",event.username);
-            this.router.navigate(['/status'])
-          },
-          err => {
-            console.log("Error occured");
-            this.router.navigate(['/login'])
-          }
-        );
-    }
-    }
+  //  login(event){
+  //      console.log("login name",event.email);
+  //      console.log("login password",event.username);
+  //      if(event.email!="" && event.username!=""){
+  //      return this._http.post('http://localhost:8080/git/getLogin',event)
+  //      .subscribe(
+  //        res => {
+  //          console.log(res);
+  //          console.log("logged in with username ",event.email," and password ",event.username);
+  //          this.router.navigate(['/status'])
+  //        },
+  //        err => {
+  //          console.log("Error occured");
+  //          this.router.navigate(['/login'])
+  //        }
+  //      );
+  //  }
+  //  }
 
     addRepo(event){
         console.log("adding repo ",event);

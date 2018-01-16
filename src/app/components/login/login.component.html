@@ -46,6 +46,8 @@ window.onclick = function(event) {
 				<form  [formGroup]="form" (ngSubmit)="onSubmits(form.value)">
 					 <h2 class="text-center">GitTracker Login</h2>
 					<br/>
+									
+
 					<div class="form-group" >
 						<input type="email" class="form-control" formControlName="email"  placeholder="User id" required>
 					</div>
@@ -58,6 +60,7 @@ window.onclick = function(event) {
 	</div>
 					   <div class="align-center">
 					<button type="submit" class="btn btn-success" >Login</button>
+					<div *ngIf="error" class="alert alert-error" style="color:red;">{{error}}</div>
 						</div>
 				</form>
 			</div>

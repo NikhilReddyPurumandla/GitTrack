@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {GithubService} from '../../services/github.service';
 import { ChartsModule } from 'ng2-charts';
 import {  Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { AuthenticationService } from '../../services/authentication.service';
 @Component({
   moduleId:module.id,
   
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [GithubService],
+  providers: [GithubService,AuthenticationService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -35,7 +36,7 @@ username:string;
 user:any=[];
   
 constructor(private route: ActivatedRoute,
-  private router: Router,private githubService:GithubService) {
+  private router: Router,private githubService:GithubService, private authenticationService: AuthenticationService) {
  }
 
 ngOnInit() {
@@ -44,6 +45,7 @@ ngOnInit() {
     username : new FormControl("", Validators.required),
 
   });
+  this.authenticationService.logout();
 }
 
 onSubmit = function(event){
@@ -54,10 +56,28 @@ onSubmit = function(event){
 
  };
  onSubmits = function(event){
-  //event.email= this.email;
-  //event.password=this.password;
-  this.githubService.login(event);
-  
+
+console.log(event.email);
+ this.loading = true;
+ this.authenticationService.login(event)
+     .subscribe(result => {
+         if (result === true) {
+             console.log(result);
+             console.log("path for ", result ,"is ./status");
+             // login successful
+            
+             this.router.navigate(['/status'])
+         } else {
+             // login failed
+             this.error = 'Username or password is incorrect';
+             this.loading = false;
+          
+             this.router.navigate(['./login']);
+         }
+     }, error => {
+       this.loading = false;
+       this.error = error;          
+     });
   console.log(event);
 
  };

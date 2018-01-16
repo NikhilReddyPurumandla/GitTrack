@@ -76,9 +76,13 @@ emptyArray=[]
   }
   constructor(private route: ActivatedRoute,
     private router: Router,private _githubService:GithubService) {
+      this._githubService.getRepo().subscribe(repo => {
+        this.repo = repo;
+        })
    }
 
   ngOnInit() {
+   
     this.form = new FormGroup({
       repo : new FormControl("", Validators.required),
     });
@@ -86,20 +90,17 @@ emptyArray=[]
       usernames : new FormControl("", Validators.required),
       
         });
-    
-    this._githubService.getRepo().subscribe(repo => {
-      this.repo = repo;
-      console.log("repos list",repo);
-    
-    });
+       
+   
+  
 }
+
 onSubmit = function(event){
   console.log(event);
   this._githubService.addRepo(event);
- 
   this._githubService.getRepo().subscribe(repo => {
     this.repo = repo;
-  })
+    })
 };
 
 click(event){
@@ -113,13 +114,15 @@ console.log("event",event);
 
 delete(repo){
   console.log("to be deleted event",repo.id);
-  if(confirm("Do u really want to delete ?")){
-  if(this._githubService.deleteRepo(repo)){
-  this._githubService.getRepo().subscribe(repo => {
-    this.repo = repo;
-  })
-}
+  if(confirm("Do you really want to delete ?")){
+  this._githubService.deleteRepo(repo)
+
+
+    //location.reload();
+    document.location.reload(false);
+    
   }
+  
   }
  
  

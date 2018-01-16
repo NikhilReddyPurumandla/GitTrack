@@ -36,7 +36,11 @@ export class OrganisationComponent implements OnInit {
   a:any=[];
   giturl:any;
   constructor(private _githubService:GithubService){
+    this._githubService.getRepo().subscribe(repo => {
+      this.repo = repo;
+      console.log("repos list",repo);
     
+    }); 
 }
 
   ngOnInit() {
@@ -48,11 +52,7 @@ export class OrganisationComponent implements OnInit {
       
         });
     
-    this._githubService.getRepo().subscribe(repo => {
-      this.repo = repo;
-      console.log("repos list",repo);
     
-    });
   
   }
   onSubmit = function(event){
@@ -75,12 +75,12 @@ export class OrganisationComponent implements OnInit {
   
 delete(repo){
   console.log("to be deleted event",repo.id);
-  if(confirm("Do u really want to delete ?")){
-  if(this._githubService.deleteRepo(repo)){
-  this._githubService.getRepo().subscribe(repo => {
-    this.repo = repo;
-  })
-}
+  if(confirm("Do you really want to delete ?")){
+  this._githubService.deleteRepo(repo)
+
+
+    //location.reload();
+    document.location.reload(false);
   }
   }
   
